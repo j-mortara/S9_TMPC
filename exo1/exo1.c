@@ -3,7 +3,7 @@
 #include<pthread.h>
 #include <sys/time.h>
 
-static unsigned long x, y=362436069, z=521288629;
+static __thread unsigned long x, y, z;
 
 unsigned long results[4];
 
@@ -26,19 +26,22 @@ void* f(void* input) {
 	int i = *((int *) input);
 	struct timeval time;
 	gettimeofday(&time, NULL);
-	printf("%ld, %d\n", time.tv_usec, i);
+	y = time.tv_usec * (i+1);
+	z = time.tv_usec + (i+1);
+	for(int j = 0 ; j < (100000000) ; j++){
+		results[i] += (xorshf96()%2);
+	}
 }
 
 int main() {
 	pthread_t threads[4];
-	int* nbs[4];
+	int nbs[4];
 	for (int i=0 ; i < 4 ; i++){
-		nbs[i] = malloc(sizeof(int));
-		*nbs[i] = i;
-		pthread_create(threads+i, NULL, f, nbs[i]);
+		nbs[i] = i;
+		pthread_create(threads+i, NULL, f, nbs+i);
 	}
 	for (int i=0 ; i < 4 ; i++){
 		pthread_join(threads[i], NULL);
 	}
-	free(&id);
+	printf("[%lu, %lu, %lu, %lu]\n", results[0], results[1], results[2], results[3]);
 }
