@@ -2,7 +2,14 @@
 
 _Thomas CANAVA - Johann MORTARA_
 
+
 ## Exercice 1
+
+### Compilation
+Pour compiler les fichiers dans le dossier `exo1` il faut faire :
+- `make` pour compiler le fichier sans optimisations
+- `make NB=n opti` pour compiler le fichier avec l'optimisation niveau `n`
+- `make PADDING=n padding` pour compiler le fichier avec un padding `n`
 
 ### Question 1.1
 
