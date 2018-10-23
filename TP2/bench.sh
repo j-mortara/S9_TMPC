@@ -2,6 +2,7 @@
 
 rm -f a.out res.txt
 
+
 echo "[INFO] Usage: bench.sh SOURCE_FILE N_THREADS USE_CPUS"
 
 if [[ $# -lt 2 ]]
@@ -27,5 +28,4 @@ for a in {1..3};do
     ./a.out 
 done
 
-rm -f a.out res.txt
 
