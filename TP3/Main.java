@@ -44,9 +44,10 @@ public class Main extends Thread {
         int n = 99;
         Thread threads[] = new Thread[n];
         
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++) {
             threads[i] = new Main();
-        threads[i].start();
+            threads[i].start();
+        }
         
         new Main().run();
         
